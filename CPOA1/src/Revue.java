@@ -1,20 +1,24 @@
 import java.sql.*;
+import java.util.Scanner;
 
-public class Revue {
+public class Revue extends Periodicite {
 
-    public void insert(String description,String titre,float tarif_numero,String visuel,int id ){
+    Periodicite peo = new Periodicite();
+    Scanner sc = new Scanner();
+
+    public void insert(String description,String titre,float tarif_numero,String visuel ){
         try{
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
 
             PreparedStatement requete = laConnexion.prepareStatement("insert into Revue (titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            requete.setString(1,nom);
-            requete.setString(2,prenom);
-            requete.setString(3,noRue);
-            requete.setString(4,voie);
-            requete.setString(5,codePostal);
-            requete.setString(6,ville);
-            requete.setString(7,pays);
+            requete.setString(1,titre);
+            requete.setString(2,description);
+            requete.setFloat(3,tarif_numero);
+            requete.setString(4,visuel);
+            peo.getIdList();
+            int id = sc.nextInt();
+            if ()
 
             requete.executeUpdate();
         }catch (SQLException sqle){

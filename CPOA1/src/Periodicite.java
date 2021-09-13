@@ -1,7 +1,54 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Periodicite {
+    private ArrayList<Integer> idList = new ArrayList();
 
+    public String getLibeller (int id){
+        try {
+            String lib = null;
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
+
+            PreparedStatement req = laConnexion.prepareStatement("SELECT libelle FROM Periodicite WHERE id_periodicite = ? ");
+            req.setInt(1,id);
+            ResultSet res = req.executeQuery();
+            if (res.next()) {
+                lib = res.getString("libelle");
+            }
+            return lib ;
+        }catch (SQLException sqle) {
+            System.out.println("Pb dans select " + sqle.getMessage());
+            return "fail";
+        }
+    }
+
+
+    public ArrayList<Integer> getIdList() {
+       try {
+           Connexion connexion = new Connexion();
+           Connection laConnexion = connexion.creeConnexion();
+
+
+           PreparedStatement req = laConnexion.prepareStatement("SELECT id_periodicite,libelle FROM Periodicite ");
+           ResultSet res = req.executeQuery();
+           while (res.next()){
+               int id = res.getInt("id_periodicite");
+               String libelle = res.getString("libelle");
+
+               System.out.println("ID :"+ id );
+               System.out.println("Libelle :"+ libelle);
+               idList.add(id);
+
+
+           }
+           return idList;
+       }catch (SQLException sqle) {
+           System.out.println("Pb dans select " + sqle.getMessage());
+       }
+
+        return null;
+    }
     public void insert (String libelle) {
         try {
             Connexion connexion = new Connexion();
