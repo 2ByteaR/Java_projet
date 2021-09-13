@@ -13,6 +13,7 @@ public class Periodicite {
             req.setString(1, libelle);
             ResultSet res = req.getGeneratedKeys();
             if (res.next()) {
+
                 int cle = res.getInt(1);
             }
         } catch (SQLException sqle) {
