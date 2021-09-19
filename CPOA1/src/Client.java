@@ -41,13 +41,13 @@ public class Client {
             System.out.println("Pb dans select " + sqle.getMessage());
         }
     }
-        public void delete (int id){
+        public void delete (int id_cl){
             try {
                 Connexion connexion = new Connexion();
                 Connection laConnexion = connexion.creeConnexion();
 
                 PreparedStatement requete = laConnexion.prepareStatement("delete from Client where id_client=?");
-                requete.setInt(1,id);
+                requete.setInt(1,id_cl);
                 requete.executeUpdate();
 
             }
