@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Periodicite {
     private ArrayList<Integer> idList = new ArrayList();
 
+    //Permet d'avoir le libeller à partir d'un id
     public String getLibeller (int id){
         try {
             String lib = null;
@@ -23,7 +24,7 @@ public class Periodicite {
         }
     }
 
-
+    //Permet d'afficher la liste des ID et d'afficher leur ID ainsi que le libeller correspondant
     public ArrayList<Integer> getIdList() {
        try {
            Connexion connexion = new Connexion();
@@ -36,8 +37,8 @@ public class Periodicite {
                int id = res.getInt("id_periodicite");
                String libelle = res.getString("libelle");
 
-               System.out.println("ID :"+ id );
-               System.out.println("Libelle :"+ libelle);
+               System.out.println("ID : "+ id );
+               System.out.println("Libelle : "+ libelle);
                idList.add(id);
 
 
@@ -49,6 +50,8 @@ public class Periodicite {
 
         return null;
     }
+
+    //Insert le libeller avec ID crée automatiquement
     public void insert (String libelle) {
         try {
             Connexion connexion = new Connexion();
@@ -67,6 +70,8 @@ public class Periodicite {
             System.out.println("Pb dans select " + sqle.getMessage());
         }
     }
+
+    //Effacement a partir de l'ID
     public void delete(int id){
         try {
             Connexion connexion = new Connexion();
@@ -83,6 +88,7 @@ public class Periodicite {
 
     }
 
+    //Met a jour un ligne avec l'id  correspondant
     public void update(int id,String lib){
         try {
             Connexion connexion = new Connexion();

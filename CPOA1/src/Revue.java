@@ -1,24 +1,34 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Revue extends Periodicite {
 
     Periodicite peo = new Periodicite();
-    Scanner sc = new Scanner();
+    Scanner sc = new Scanner(System.in);
 
     public void insert(String description,String titre,float tarif_numero,String visuel ){
         try{
+           ArrayList<Integer> idList = new ArrayList();
+
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
 
-            PreparedStatement requete = laConnexion.prepareStatement("insert into Revue (titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement requete = laConnexion.prepareStatement("insert into Revue (titre,description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             requete.setString(1,titre);
             requete.setString(2,description);
             requete.setFloat(3,tarif_numero);
             requete.setString(4,visuel);
+
+
             peo.getIdList();
+            System.out.println("Veuillez choisir l'id que vous voulez rajouter");
             int id = sc.nextInt();
-            if ()
+            while(!peo.getIdList().contains(id)){
+                System.out.println("Veuillez choisir un id valide");
+                id = sc.nextInt();
+            }
+            requete.setInt(5,id);
 
             requete.executeUpdate();
         }catch (SQLException sqle){

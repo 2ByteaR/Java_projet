@@ -6,15 +6,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        //ArrayList<Integer> liste = new ArrayList<>();
-        Periodicite peo = new Periodicite();
-        /*liste = peo.getIdList();
+        Revue R1 = new Revue();
 
-        Iterator<Integer> li  = liste.iterator();
-
-        while (li.hasNext()) {
-            System.out.println(li.next());*/
-        System.out.println(peo.getLibeller(4));
+        R1.insert("Je fais test","test5",15,"beau");
 
         }
     }
