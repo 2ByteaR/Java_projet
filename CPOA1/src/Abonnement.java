@@ -15,7 +15,7 @@ public class Abonnement {
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
 
-            //Affichage du nom, prenom, et ID avec un enregistrement des ID dans une arraylist
+//Affichage du nom, prenom, et ID avec un enregistrement des ID dans une arraylist
             PreparedStatement req = laConnexion.prepareStatement("SELECT id_client,nom,prenom FROM Client ");
             ResultSet res = req.executeQuery();
             while (res.next()){
@@ -52,28 +52,26 @@ public class Abonnement {
 
             PreparedStatement req = laConnexion.prepareStatement("SELECT id_revue,titre FROM Revue");
             ResultSet res = req.executeQuery();
-            while (res.next()){
+            while (res.next()) {
                 int id = res.getInt("id_revue");
                 String titre = res.getString("titre");
 
-                System.out.println("ID : "+ id );
-                System.out.println("titre : "+ titre);
+                System.out.println("ID : " + id);
+                System.out.println("titre : " + titre);
                 idListRevue.add(id);
-
+            }
                 System.out.println("Veuillez choisir l'id que vous voulez");
                 id1 = sc.nextInt();
-                while(idListRevue.contains(id1)){
+                while(!idListRevue.contains(id1)){
                     System.out.println("Veuillez choisir un id valide");
                     id1 = sc.nextInt();
                 }
                 return id1;
 
-            }
         }catch (SQLException sqle) {
             System.out.println("Pb dans select " + sqle.getMessage());
             return -1;
         }
-        return id1;
     }
 
     //Vérification de la conformité de la Date
@@ -84,21 +82,20 @@ public class Abonnement {
                 SimpleDateFormat format = new SimpleDateFormat(formatDate);
                 format.setLenient(false);
                 format.parse(date);
-            } catch (ParseException | IllegalArgumentException e) {
+            } catch (Exception e) {
                 return false;
             }
             return true;
 }
 
-    public java.sql.Date verif_Date(){
-        String date ;
+    public java.sql.Date dateValid(){
+        String date1;
         do {
-            System.out.println("Veuillez entrer une date de la forme yyyy/mm/dd");
-            date = sc.nextLine();
-        } while (!verifFormatDate(date));
-
-        java.util.Date myDate = new java.util.Date(date);
-        return new java.sql.Date(myDate.getTime());
+            System.out.println("Veuillez saisir une date de la forme yyyy/mm/dd");
+            date1 = sc.nextLine();
+        }while (!verifFormatDate(date1));
+        java.util.Date myDate = new java.util.Date(date1);
+       return new Date(myDate.getTime());
     }
 
     public void insert(){
@@ -108,10 +105,8 @@ public class Abonnement {
 
             PreparedStatement requete = laConnexion.prepareStatement("insert into Abonnement (date_debut,date_fin,id_revue,id_client) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
-            java.sql.Date d1 = verif_Date();
-            requete.setDate(1,d1);
-            java.sql.Date d2 = verif_Date();
-            requete.setDate(2,d2);
+            requete.setDate(1,dateValid());
+            requete.setDate(2,dateValid());
             int id1 = verif_Revue();
             requete.setInt(3,id1);
             int id = verif_client();
@@ -145,10 +140,8 @@ public class Abonnement {
 
             PreparedStatement requete = laConnexion.prepareStatement("update Abonnement SET date_debut = ?, date_fin = ?, id_revue = ?, id_client = ? WHERE id_abonnement = ?");
 
-            java.sql.Date d1 = verif_Date();
-            requete.setDate(1,d1);
-            java.sql.Date d2 = verif_Date();
-            requete.setDate(2,d2);
+            requete.setDate(1,dateValid());
+            requete.setDate(2,dateValid());
             int id1 = verif_Revue();
             requete.setInt(3,id1);
             int id = verif_client();

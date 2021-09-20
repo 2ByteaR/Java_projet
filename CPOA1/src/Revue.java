@@ -2,24 +2,45 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Revue extends Periodicite {
+public class Revue {
 
     private ArrayList<Integer> idList = new ArrayList();
-    Periodicite peo = new Periodicite();
     Scanner sc = new Scanner(System.in);
 
 
 
     // Vérification que l'id de periodicité existe bien
-    public int verif(){
-        peo.getIdList();
-        System.out.println("Veuillez choisir l'id que vous voulez");
-        int id = sc.nextInt();
-        while(!peo.getIdList().contains(id)){
-            System.out.println("Veuillez choisir un id valide");
-            id = sc.nextInt();
+    public int verif() {
+        int id1 = 0;
+        try {
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
+
+
+            PreparedStatement req = laConnexion.prepareStatement("SELECT id_periodicite,libelle FROM Periodicite ");
+            ResultSet res = req.executeQuery();
+            while (res.next()) {
+                int id = res.getInt("id_periodicite");
+                String libelle = res.getString("libelle");
+
+                System.out.println("ID : " + id);
+                System.out.println("Libelle : " + libelle);
+                idList.add(id);
+            }
+                System.out.println("Veuillez choisir l'id que vous voulez");
+                id1 = sc.nextInt();
+                while (!idList.contains(id1)) {
+                    System.out.println("Veuillez choisir un id valide");
+                    id1 = sc.nextInt();
+
+                return id1;
+            }
+
+        }catch (SQLException sqle){
+            System.out.println("Pb dans select " + sqle.getMessage());
+            return -1;
         }
-        return id;
+        return id1;
     }
     public void insert(String description,String titre,float tarif_numero,String visuel ){
         try{

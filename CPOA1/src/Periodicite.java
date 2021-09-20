@@ -40,8 +40,6 @@ public class Periodicite {
                System.out.println("ID : "+ id );
                System.out.println("Libelle : "+ libelle);
                idList.add(id);
-
-
            }
            return idList;
        }catch (SQLException sqle) {
