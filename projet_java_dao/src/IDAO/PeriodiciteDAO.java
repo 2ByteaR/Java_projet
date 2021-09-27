@@ -3,7 +3,9 @@ package IDAO;
 import DAO.DAO;
 import Métier.Periodicite;
 
-public interface PeriodiciteDAO extends DAO<Periodicite>{
+import java.util.List;
 
-    String getBylibelle(String libelle);
+public interface PeriodiciteDAO<Periodicite> extends DAO<Periodicite>{
+    List<Periodicite> getByPeriodicite(Periodicite periodicite);
+    List<Periodicite> getBylibelle(String libelle);
 }
