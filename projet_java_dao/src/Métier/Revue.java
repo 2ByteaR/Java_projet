@@ -79,4 +79,16 @@ public class Revue {
     public void setVisuel(String visuel) {
         this.visuel = visuel;
     }
+
+    @Override
+    public String toString() {
+        return "Revue{" +
+                "id_revue=" + id_revue +
+                ", id_periodicite=" + id_periodicite +
+                ", description='" + description + '\'' +
+                ", tarif_numeros=" + tarif_numeros +
+                ", titre='" + titre + '\'' +
+                ", visuel='" + visuel + '\'' +
+                '}';
+    }
 }

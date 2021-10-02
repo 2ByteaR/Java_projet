@@ -19,6 +19,7 @@ public class ListeMemoirePeriodiciteDAO  implements PeriodiciteDAO<Periodicite> 
     }
     @Override
     public Periodicite getById(int id) {
+
         return null;
     }
 
@@ -37,10 +38,7 @@ public class ListeMemoirePeriodiciteDAO  implements PeriodiciteDAO<Periodicite> 
         return false;
     }
 
-    @Override
-    public List<Periodicite> getByPeriodicite(Periodicite periodicite) {
-        return null;
-    }
+
 
     @Override
     public List<Periodicite> getBylibelle(String libelle) {

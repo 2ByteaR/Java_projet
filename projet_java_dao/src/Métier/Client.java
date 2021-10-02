@@ -12,6 +12,17 @@ public class Client {
     private String code_postal;
     private int id_client;
 
+    public Client(String nom, String prenom, String noRue, String ville, String pays, String voie, String code_postal, int id_client) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.noRue = noRue;
+        this.ville = ville;
+        this.pays = pays;
+        this.voie = voie;
+        this.code_postal = code_postal;
+        this.id_client = id_client;
+    }
+
     public int getId_client() {
         return id_client;
     }

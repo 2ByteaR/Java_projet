@@ -6,7 +6,6 @@ import Métier.Client;
 import java.util.List;
 
 public interface ClientDAO<Client> extends DAO<Client> {
-    List<Client> getByClient(Client client);
     List<Client> getByCodePostal(String code_postal);
     List<Client> getByNom(String nom);
     List<Client> getByNoRue(String no_rue);

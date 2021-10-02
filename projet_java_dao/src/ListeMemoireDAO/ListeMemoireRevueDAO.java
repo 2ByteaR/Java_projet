@@ -38,10 +38,7 @@ public class ListeMemoireRevueDAO implements RevueDAO<Revue> {
         return false;
     }
 
-    @Override
-    public List<Revue> getByRevue(Revue revue) {
-        return null;
-    }
+
 
     @Override
     public List<Revue> getByDescription(String description) {

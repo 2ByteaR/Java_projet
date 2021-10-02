@@ -38,10 +38,7 @@ public class ListeMemoireClientDAO implements ClientDAO<Client> {
         return false;
     }
 
-    @Override
-    public List<Client> getByClient(Client client) {
-        return null;
-    }
+
 
     @Override
     public List<Client> getByCodePostal(String code_postal) {

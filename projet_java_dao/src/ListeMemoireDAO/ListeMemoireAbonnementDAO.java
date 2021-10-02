@@ -40,10 +40,6 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO<Abonnement> {
         return false;
     }
 
-    @Override
-    public List<Abonnement> getByAbonnement(Abonnement abonnement) {
-        return null;
-    }
 
     @Override
     public List<Abonnement> getByDateDeb(Date date_deb) {
