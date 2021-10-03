@@ -6,6 +6,7 @@ import DAOFactory.DAOFactory;
 import DAOFactory.Persistance;
 import Métier.Abonnement;
 import Métier.Client;
+import Métier.Periodicite;
 import Métier.Revue;
 
 import java.sql.*;
@@ -52,6 +53,7 @@ public class Main {
         System.out.println("Choississez la table Abonnement/Client/Periodicite/Revue");
         String choix = sc.nextLine();
 
+
         switch (choix.toLowerCase()){
             case "abonnement":
                 choixAbonnement();
@@ -59,8 +61,8 @@ public class Main {
             case "client":
                 choixClient();
                 break;
-            case "periodicte":
-                System.out.println("pe");
+            case "periodicite":
+                choixPeriodicite();
                 break;
             case "revue":
                 System.out.println("re");
@@ -72,7 +74,7 @@ public class Main {
 
     public static DAOFactory choixPersistance() {
         System.out.println("Veuillez choisir votre base de données Mysql ou ListeMemoire");
-        String choix = null;
+        String choix;
         do {
             choix = sc.nextLine();
         } while (!(choix.equalsIgnoreCase("mysql") || choix.equalsIgnoreCase("listememoire")));
@@ -83,6 +85,60 @@ public class Main {
             return DAOFactory.getDAOFactory(Persistance.ListeMemoire);
         }
     }
+
+    public static void choixPeriodicite(){
+        int choix;
+        do {
+            System.out.println(message+ "5- par libelle");
+            choix = sc.nextInt();
+        }while(!(choix >= 0 && choix <= 5));
+        DAOFactory daos = choixPersistance();
+
+        switch (choix){
+            case 1:
+                daos.getPeriodicteDAO().create(creePeriodicte(1,daos));
+                break;
+            case 2:
+                daos.getPeriodicteDAO().delete(creePeriodicte(2,daos));
+                break;
+            case 3:
+                daos.getPeriodicteDAO().update(creePeriodicte(3,daos));
+                break;
+            case 4:
+                id = sc.nextInt();
+                daos.getPeriodicteDAO().getById(id);
+                break;
+            case 5:
+                String libelle = sc.nextLine();
+                daos.getPeriodicteDAO().getBylibelle(libelle);
+                break;
+        }
+    }
+
+    public static Periodicite creePeriodicte(int typeAction, DAOFactory daos){
+        int id =0;
+        String libelle = null;
+
+            switch (typeAction){
+                case 3:
+                    do {
+                        System.out.println("Saissisez l'id que vous voulez modifier");
+                        id = sc.nextInt();
+                    }while (daos.getPeriodicteDAO().getById(id) == null);
+                case 1:
+                    System.out.println("Veuillez entrer un libelle");
+                    libelle = sc.nextLine();
+                    break;
+                case 2:
+                    do {
+                        System.out.println("Saissisez l'id que vous voulez supprimer");
+                        id = sc.nextInt();
+                        break;
+                    }while (daos.getPeriodicteDAO().getById(id)==null);
+            }
+            return new Periodicite(id,libelle);
+    }
+
 
     public static void choixClient(){
         int choix;
@@ -103,7 +159,8 @@ public class Main {
                 daos.getClientDAO().update(creeClient(3,daos));
                 break;
             case 4:
-                daos.getClientDAO().getById(sc.nextInt());
+                id = sc.nextInt();
+                daos.getClientDAO().getById(id);
                 break;
             case 5:
                 daos.getClientDAO().getByNom(sc.nextLine());
@@ -159,6 +216,14 @@ public class Main {
                 break;
         }
 
+    }
+
+    public static void choixRevue(){
+        int choix;
+        do {
+            System.out.println(message + "5- par une date de début | 6- de fin ?");
+            choix = sc.nextInt();
+        } while (!(choix >= 0 && choix <= 6));
     }
 
     public static boolean verifFormatDate(String date) {
@@ -266,28 +331,24 @@ public class Main {
                     System.out.println("Saissisez l'id que vous voulez modifier");
                     id = sc.nextInt();
                 }while (daos.getClientDAO().getById(id) == null);
-                        case 1:
-                    System.out.println("Veuillez entrer un nom | un prenom | un noRue | une ville | un pays | une voie | un code_postal ");
-                    nom = sc.nextLine();
-                    prenom = sc.nextLine();
-                    noRue = sc.nextLine();
-                    ville = sc.nextLine();
-                    pays = sc.nextLine();
-                    voie = sc.nextLine();
-                    codePostal = sc.nextLine();
+            case 1:
+                System.out.println("Veuillez entrer un nom | un prenom | un noRue | une ville | un pays | une voie | un code_postal ");
+                nom = sc.nextLine();
+                prenom = sc.nextLine();
+                noRue = sc.nextLine();
+                ville = sc.nextLine();
+                pays = sc.nextLine();
+                voie = sc.nextLine();
+                codePostal = sc.nextLine();
+                break;
+            case 2:
+                do {
+                    System.out.println("Saissisez l'id que vous voulez supprimer");
+                    id = sc.nextInt();
                     break;
-                    case 2:
-                        do {
-                        System.out.println("Saissisez l'id que vous voulez supprimer");
-                        id = sc.nextInt();
-                        break;
-                        }while (daos.getClientDAO().getById(id)==null);
+                }while (daos.getClientDAO().getById(id)==null);
         }
 
         return new Client(nom,prenom, noRue,ville, pays,voie,codePostal,idClient);
     }
 }
-
-
-
-
