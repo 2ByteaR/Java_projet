@@ -76,7 +76,7 @@ public class ListeMemoirePeriodiciteDAO  implements PeriodiciteDAO<Periodicite> 
         // Ne fonctionne que si l'objet mÃ©tier est bien fait...
         int idx = this.donnees.indexOf(new Periodicite(id, "test"));
         if (idx == -1) {
-            throw new IllegalArgumentException("Aucun objet ne possÃ¨de cet identifiant");
+            throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
         } else {
             return this.donnees.get(idx);
         }
@@ -89,6 +89,7 @@ public class ListeMemoirePeriodiciteDAO  implements PeriodiciteDAO<Periodicite> 
 
     @Override
     public List<Periodicite> getBylibelle(String libelle) {
+
         List<Periodicite> per = new ArrayList<>();
         for (Periodicite pe: donnees) {
             if (pe.getLibelle().equalsIgnoreCase(libelle)){

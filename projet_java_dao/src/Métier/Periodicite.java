@@ -39,4 +39,12 @@ public class Periodicite {
         this.id = id;
         this.libelle = libelle;
     }
+
+    @Override
+    public String toString() {
+        return "Periodicite{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                '}';
+    }
 }

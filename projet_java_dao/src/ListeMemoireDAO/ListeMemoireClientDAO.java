@@ -2,17 +2,20 @@ package ListeMemoireDAO;
 
 import IDAO.ClientDAO;
 import Métier.Client;
+import Métier.Periodicite;
+import Métier.Revue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListeMemoireClientDAO implements ClientDAO<Client> {
 
     private static ListeMemoireClientDAO instance;
-    private List<Client> data;
+    private List<Client> donnees;
 
     private void ListeMemoireDAO(){
-        if (data == null || data.isEmpty()) {
-          data.add(new Client("CARL","Noé"," rue de josé","Hargarten-aux-Mine","France","2bis","5010001000",1));
+        if (donnees == null || donnees.isEmpty()) {
+          donnees.add(new Client("CARL","Noé"," rue de josé","Hargarten-aux-Mine","France","2bis","5010001000",1));
         }
     }
 
@@ -32,54 +35,120 @@ public class ListeMemoireClientDAO implements ClientDAO<Client> {
 
     @Override
     public boolean create(Client objet) {
-        data.add(objet);
-        return false;
+        objet.setId_client(objet.getId_client());
+        // Ne fonctionne que si l'objet mÃ©tier est bien fait...
+        while (this.donnees.contains(objet)) {
+
+            objet.setId_client(objet.getId_client() + 1);
+        }
+        boolean ok = this.donnees.add(objet);
+
+        return ok;
     }
 
     @Override
     public boolean update(Client objet) {
-        return false;
+        int idx = this.donnees.indexOf(objet);
+        if (idx == -1) {
+            throw new IllegalArgumentException("Tentative de modification d'un objet inexistant");
+        } else {
+
+            this.donnees.set(idx, objet);
+        }
+
+        return true;
     }
 
     @Override
     public boolean delete(Client objet) {
-        return false;
+        Client supprime;
+
+        int idx = this.donnees.indexOf(objet);
+        if (idx == -1) {
+            throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
+        } else {
+            supprime = this.donnees.remove(idx);
+        }
+
+        return objet.equals(supprime);
     }
 
 
 
     @Override
     public List<Client> getByCodePostal(String code_postal) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getCode_postal().equalsIgnoreCase(code_postal)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 
     @Override
     public List<Client> getByNom(String nom) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getNom().equalsIgnoreCase(nom)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 
     @Override
     public List<Client> getByNoRue(String no_rue) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getNoRue().equalsIgnoreCase(no_rue)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 
     @Override
     public List<Client> getByPrenom(String prenom) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getPrenom().equalsIgnoreCase(prenom)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 
     @Override
     public List<Client> getByVille(String ville) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getVille().equalsIgnoreCase(ville)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 
     @Override
     public List<Client> getByVoie(String voie) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getVoie().equalsIgnoreCase(voie)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 
     @Override
     public List<Client> getByPays(String pays) {
-        return null;
+        List<Client> per = new ArrayList<>();
+        for (Client pe: donnees) {
+            if (pe.getPays().equalsIgnoreCase(pays)){
+                per.add(pe);
+            }
+        }
+        return per;
     }
 }

@@ -13,6 +13,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -105,12 +106,17 @@ public class Main {
                 daos.getPeriodicteDAO().update(creePeriodicte(3,daos));
                 break;
             case 4:
+                System.out.println("Veuillez choisir votre id");
                 id = sc.nextInt();
                 daos.getPeriodicteDAO().getById(id);
                 break;
             case 5:
+                System.out.println("Veuillez choisir votre libelle");
                 String libelle = sc.nextLine();
-                daos.getPeriodicteDAO().getBylibelle(libelle);
+                List<Periodicite> pe = daos.getPeriodicteDAO().getBylibelle(libelle);
+                for (Periodicite per : pe) {
+                    per.toString();
+                }
                 break;
         }
     }
@@ -143,7 +149,7 @@ public class Main {
     public static void choixClient(){
         int choix;
         do {
-            System.out.println(message + "5- par un nom| 6- prénom | 7-no Rue | 8-Pays | 9-ville | 10-code | 11-voie");
+            System.out.println(message + "5- par un nom | 6- prénom | 7-no Rue | 8-Pays | 9-ville | 10-code | 11-voie");
             choix = sc.nextInt();
         }while(!(choix >= 0 && choix <= 11));
         DAOFactory daos = choixPersistance();
