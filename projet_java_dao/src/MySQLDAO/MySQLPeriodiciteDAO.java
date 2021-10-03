@@ -114,8 +114,6 @@ public class MySQLPeriodiciteDAO implements PeriodiciteDAO<Periodicite> {
             }
             return new Periodicite(id,libelle);
 
-
-
         }catch (SQLException e){
             System.out.println("Pb dans select " + e.getMessage());
             return null ;

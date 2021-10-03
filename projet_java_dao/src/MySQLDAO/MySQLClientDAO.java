@@ -37,6 +37,7 @@ public class MySQLClientDAO implements ClientDAO<Client> {
             PreparedStatement req = laConnexion.prepareStatement("SELECT nom,prenom,no_rue,voie,code_postal,ville,pays FROM Client WHERE id_client = ?  ");
             req.setInt(1,id);
             ResultSet res = req.executeQuery();
+            Client cl = null;
             while (res.next()){
                  prenom =res.getString("prenom");
                  noRue=res.getString("no_rue");
@@ -45,11 +46,9 @@ public class MySQLClientDAO implements ClientDAO<Client> {
                  ville = res.getString("ville");
                  pays = res.getString("pays");
                  codePostal =res.getString("code_postal");
+                    cl = new Client(nom,prenom,noRue,ville,pays,voie,codePostal,id);
             }
-
-
-
-            return new Client(nom,prenom,noRue,ville,pays,voie,codePostal,id);
+            return cl;
 
         }catch (SQLException e){
             System.out.println("Pb dans select " + e.getMessage());

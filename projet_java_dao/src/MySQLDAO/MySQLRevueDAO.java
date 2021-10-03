@@ -28,13 +28,6 @@ public class MySQLRevueDAO implements RevueDAO<Revue> {
     @Override
     public Revue getById(int id) {
 
-        int id_periodicite = 0;
-        String titre = null;
-        String description = null;
-        Float tarif_numeros = null;
-        String visuel = null;
-        Revue re = null;
-
         try {
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
@@ -42,12 +35,13 @@ public class MySQLRevueDAO implements RevueDAO<Revue> {
             PreparedStatement req = laConnexion.prepareStatement("SELECT id_revue,titre,description,tarif_numero,visuel,id_periodicite FROM Revue WHERE id_revue = ? ");
             req.setInt(1,id);
             ResultSet res = req.executeQuery();
+            Revue re = null;
             while (res.next()){
-                id_periodicite =res.getInt("id_periodicite");
-                titre = res.getString("titre");
-                description = res.getString("description");
-                tarif_numeros = res.getFloat("tarif_numero");
-                visuel = res.getString("visuel");
+                int id_periodicite =res.getInt("id_periodicite");
+                String titre = res.getString("titre");
+                String description = res.getString("description");
+                Float tarif_numeros = res.getFloat("tarif_numero");
+                String visuel = res.getString("visuel");
 
                 re = new Revue(id,id_periodicite,description,tarif_numeros,titre,visuel);
             }

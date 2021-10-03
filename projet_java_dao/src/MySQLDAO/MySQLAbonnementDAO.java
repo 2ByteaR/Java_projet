@@ -29,25 +29,26 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
         Date date_deb;
         Date date_fin;
 
-        try{
+        try {
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
 
-            PreparedStatement requete= laConnexion.prepareStatement("SELECT id_abonnement,id_client,id_revue,date_deb,date_fin, WHERE id_abonnement = ? FROM Abonnement");
-            requete.setInt(1,id);
+            PreparedStatement requete = laConnexion.prepareStatement("SELECT id_abonnement,id_client,id_revue,date_debut,date_fin FROM Abonnement WHERE id_abonnement = ? ");
+            requete.setInt(1, id);
             ResultSet res = requete.executeQuery();
 
-            while  (res.next())
-            id_revue = res.getInt("id_revue");
-            id_client =res.getInt("id_client");
-            date_deb = res.getDate("date_deb");
-            date_fin = res.getDate("date_fin");
+            while (res.next()) {
+                id_revue = res.getInt("id_revue");
+                id_client = res.getInt("id_client");
+                date_deb = res.getDate("date_debut");
+                date_fin = res.getDate("date_fin");
 
-            return new Abonnement(id,date_deb,date_fin,id_client,id_revue);
+                return new Abonnement(id, date_deb, date_fin, id_client, id_revue);
 
+            }
         }
         catch (SQLException sql){
-            System.out.println("pb dans le select" + sql.getMessage());
+            System.out.println("pb dans le select " + sql.getMessage());
         }
         return null;
     }
@@ -61,8 +62,15 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
             PreparedStatement requete = laConnexion.prepareStatement("insert into Abonnement (date_debut,date_fin,id_revue,id_client) values (?,?,?,?)");
             requete.setInt(4, objet.getId_abonnement());
             requete.setInt(3,objet.getId_revue());
-            requete.setDate(2, (java.sql.Date) objet.getDate_fin());
-            requete.setDate(1, (java.sql.Date) objet.getDate_deb());
+
+            long timeInMilliSeconds = objet.getDate_deb().getTime();
+            java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+            requete.setDate(2, date1);
+
+            timeInMilliSeconds = objet.getDate_fin().getTime();
+            java.sql.Date date2 = new java.sql.Date(timeInMilliSeconds);
+            requete.setDate(1, date2);
+
             requete.executeUpdate();
 
             return true;
@@ -80,8 +88,14 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
 
             PreparedStatement requete = laConnexion.prepareStatement("update Abonnement SET date_debut = ?, date_fin = ?, id_revue = ?, id_client = ? WHERE id_abonnement = ?");
 
-            requete.setDate(1, (java.sql.Date) objet.getDate_deb());
-            requete.setDate(2,(java.sql.Date) objet.getDate_fin());
+            long timeInMilliSeconds = objet.getDate_deb().getTime();
+            java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+            requete.setDate(2, date1);
+
+            timeInMilliSeconds = objet.getDate_fin().getTime();
+            java.sql.Date date2 = new java.sql.Date(timeInMilliSeconds);
+            requete.setDate(1, date2);
+
             requete.setInt(3,objet.getId_revue());
             requete.setInt(4,objet.getId_client());
             requete.setInt(5,objet.getId_abonnement());
@@ -101,7 +115,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
             Connection laConnexion = connexion.creeConnexion();
 
             PreparedStatement requete = laConnexion.prepareStatement("delete from Abonnement where id_abonnement=?");
-            requete.setInt(1,objet.getId_client());
+            requete.setInt(1,objet.getId_abonnement());
             requete.executeUpdate();
             return true;
         }catch (SQLException sqle){
@@ -117,9 +131,12 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
         try{
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
+            long timeInMilliSeconds = date_deb.getTime();
+            java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
 
-            PreparedStatement requete = laConnexion.prepareStatement("SELECT id_abonnement,id_client,id_revue,date_deb,date_fin, WHERE date_deb = ? FROM Abonnement");
-            requete.setDate(1, (java.sql.Date) date_deb);
+            PreparedStatement requete = laConnexion.prepareStatement("SELECT id_abonnement,id_client,id_revue,date_debut,date_fin FROM Abonnement WHERE date_debut = ? ");
+
+            requete.setDate(1,date1);
             ResultSet res = requete.executeQuery();
             while (res.next()){
                 int id_revue = res.getInt("id_revue");
@@ -148,7 +165,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
 
-            PreparedStatement requete = laConnexion.prepareStatement("SELECT id_abonnement,id_client,id_revue,date_deb,date_deb, WHERE date_fin = ? FROM Abonnement");
+            PreparedStatement requete = laConnexion.prepareStatement("SELECT id_abonnement,id_client,id_revue,date_debut,date_fin FROM Abonnement WHERE date_fin = ?");
             requete.setDate(1, (java.sql.Date) date_fin);
             ResultSet res = requete.executeQuery();
             while (res.next()){

@@ -70,4 +70,15 @@ public class Abonnement  {
     public void setId_revue(int id_revue) {
         this.id_revue = id_revue;
     }
+
+    @Override
+    public String toString() {
+        return "Abonnement{" +
+                "id_abonnement=" + id_abonnement +
+                ", date_deb=" + date_deb +
+                ", date_fin=" + date_fin +
+                ", id_client=" + id_client +
+                ", id_revue=" + id_revue +
+                '}';
+    }
 }
