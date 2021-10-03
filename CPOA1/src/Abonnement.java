@@ -107,7 +107,7 @@ public class Abonnement {
 
             requete.setDate(1,dateValid());
             requete.setDate(2,dateValid());
-            int id1 = verif_Revue();
+            int id = verif_client();
             requete.setInt(3,id1);
             int id = verif_client();
             requete.setInt(4,id);

@@ -8,6 +8,13 @@ import java.util.List;
 public class ListeMemoireClientDAO implements ClientDAO<Client> {
 
     private static ListeMemoireClientDAO instance;
+    private List<Client> data;
+
+    private void ListeMemoireDAO(){
+        if (data == null || data.isEmpty()) {
+          data.add(new Client("CARL","Noé"," rue de josé","Hargarten-aux-Mine","France","2bis","5010001000",1));
+        }
+    }
 
     private ListeMemoireClientDAO() {}
 
@@ -25,6 +32,7 @@ public class ListeMemoireClientDAO implements ClientDAO<Client> {
 
     @Override
     public boolean create(Client objet) {
+        data.add(objet);
         return false;
     }
 

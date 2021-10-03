@@ -99,28 +99,34 @@ public class MySQLRevueDAO implements RevueDAO<Revue> {
             PreparedStatement requete = laConnexion.prepareStatement("delete from Revue where id_revue=?");
             requete.setInt(1,objet.getId_revue());
             requete.executeUpdate();
-
+            return true;
         }
         catch (SQLException sqle){
             System.out.println("Pb dans select " + sqle.getMessage());
+            return false;
         }
     }
 
     @Override
     public List<Revue> getByDescription(String description) {
-        List<Periodicite> result = new ArrayList<>();
+        List<Revue> result = new ArrayList<>();
         int id = 0;
         try{
             Connexion connexion = new Connexion();
             Connection laConnexion = connexion.creeConnexion();
 
-            PreparedStatement req = laConnexion.prepareStatement("SELECT id_periodicite FROM Periodicite WHERE libelle = ? ");
-            req.setString(1,libelle);
+            PreparedStatement req = laConnexion.prepareStatement("SELECT id_revue,titre,description,tarif_numero,visuel,id_periodicite FROM Revue WHERE description = ? ");
+            req.setString(1,description);
             ResultSet res = req.executeQuery();
             while (res.next()){
-                id =res.getInt("id_periodicite");
-                Periodicite p1 = new Periodicite(id,libelle);
-                result.add(p1);
+                int id_revue = res.getInt("id_revue");
+                String titre = res.getString("titre");
+                Float tarif_numero = res.getFloat("tarif_numero");
+                int id_periodicite = res.getInt("id_periodicite");
+                String visuel = res.getString("visuel");
+
+                Revue revue = new Revue(id_revue,id_periodicite,description,tarif_numero,titre,visuel);
+                result.add(revue);
             }
             return result;
 
@@ -128,16 +134,63 @@ public class MySQLRevueDAO implements RevueDAO<Revue> {
             System.out.println("Pb dans select " + e.getMessage());
             return null ;
         }
-        return null;
     }
 
     @Override
     public List<Revue> getByTitre(String titre) {
-        return null;
+        List<Revue> result = new ArrayList<>();
+        int id = 0;
+        try{
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
+
+            PreparedStatement req = laConnexion.prepareStatement("SELECT id_revue,titre,description,tarif_numero,visuel,id_periodicite FROM Revue WHERE description = ? ");
+            req.setString(1,titre);
+            ResultSet res = req.executeQuery();
+            while (res.next()){
+                int id_revue = res.getInt("id_revue");
+                String description = res.getString("description");
+                Float tarif_numero = res.getFloat("tarif_numero");
+                int id_periodicite = res.getInt("id_periodicite");
+                String visuel = res.getString("visuel");
+
+                Revue revue = new Revue(id_revue,id_periodicite,description,tarif_numero,titre,visuel);
+                result.add(revue);
+            }
+            return result;
+
+        }catch (SQLException e){
+            System.out.println("Pb dans select " + e.getMessage());
+            return null ;
+        }
     }
 
     @Override
     public List<Revue> getByVisuel(String visuel) {
-        return null;
+        List<Revue> result = new ArrayList<>();
+        int id = 0;
+        try{
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
+
+            PreparedStatement req = laConnexion.prepareStatement("SELECT id_revue,titre,description,tarif_numero,visuel,id_periodicite FROM Revue WHERE description = ? ");
+            req.setString(1,visuel);
+            ResultSet res = req.executeQuery();
+            while (res.next()){
+                int id_revue = res.getInt("id_revue");
+                String titre = res.getString("titre");
+                String description = res.getString("description");
+                Float tarif_numero = res.getFloat("tarif_numero");
+                int id_periodicite = res.getInt("id_periodicite");
+
+                Revue revue = new Revue(id_revue,id_periodicite,description,tarif_numero,titre,visuel);
+                result.add(revue);
+            }
+            return result;
+
+        }catch (SQLException e){
+            System.out.println("Pb dans select " + e.getMessage());
+            return null ;
+        }
     }
 }
