@@ -34,7 +34,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO<Abonnement> {
 
     @Override
     public Abonnement getById(int id) {
-        int idx = this.donnees.indexOf(new Periodicite(id, "test"));
+        int idx = this.donnees.indexOf(new Abonnement(id, null,null,0,0));
         if (idx == -1) {
             throw new IllegalArgumentException("Aucun objet ne possède cet identifiant");
         } else {

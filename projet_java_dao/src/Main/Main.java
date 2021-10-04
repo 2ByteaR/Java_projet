@@ -169,24 +169,31 @@ public class Main {
                 daos.getClientDAO().getById(id);
                 break;
             case 5:
+                System.out.println("Veuillez saisir un nom");
                 daos.getClientDAO().getByNom(sc.nextLine());
                 break;
             case 6:
+                System.out.println("Veuillez saisir un prénom");
                 daos.getClientDAO().getByPrenom(sc.nextLine());
                 break;
             case 7:
+                System.out.println("Veuillez saisir un no de rue");
                 daos.getClientDAO().getByNoRue(sc.nextLine());
                 break;
             case 8:
+                System.out.println("Veuillez saisir un pays");
                 daos.getClientDAO().getByPays(sc.nextLine());
                 break;
             case 9:
+                System.out.println("Veuillez saisir une ville");
                 daos.getClientDAO().getByVille(sc.nextLine());
                 break;
             case 10:
+                System.out.println("Veuillez saisir un code postal");
                 daos.getClientDAO().getByCodePostal(sc.nextLine());
                 break;
             case 11:
+                System.out.println("Veuillez saisir un nom de rue");
                 daos.getClientDAO().getByVoie(sc.nextLine());
                 break;
         }

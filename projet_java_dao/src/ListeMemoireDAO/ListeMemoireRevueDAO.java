@@ -88,7 +88,7 @@ public class ListeMemoireRevueDAO implements RevueDAO<Revue> {
     public List<Revue> getByDescription(String description) {
         List<Revue> per = new ArrayList<>();
         for (Revue pe: donnees) {
-            if (pe.getVisuel().equalsIgnoreCase(description)){
+            if (pe.getDescription().equalsIgnoreCase(description)){
                 per.add(pe);
             }
         }
@@ -99,7 +99,7 @@ public class ListeMemoireRevueDAO implements RevueDAO<Revue> {
     public List<Revue> getByTitre(String titre) {
         List<Revue> per = new ArrayList<>();
         for (Revue pe: donnees) {
-            if (pe.getVisuel().equalsIgnoreCase(titre)){
+            if (pe.getTitre().equalsIgnoreCase(titre)){
                 per.add(pe);
             }
         }
