@@ -21,8 +21,6 @@ public class ListeMemoireClientDAO implements ClientDAO<Client> {
 
     }
 
-    private ListeMemoireClientDAO() {}
-
     public static ListeMemoireClientDAO getInstance() {
         if (instance == null) {
             instance = new ListeMemoireClientDAO();
@@ -91,6 +89,8 @@ public class ListeMemoireClientDAO implements ClientDAO<Client> {
     @Override
     public List<Client> getByNom(String nom) {
         List<Client> listeClient = new ArrayList<>();
+        donnees.add(new Client("CARL","Noé"," rue de josé","Metz","France","2bis","57800",1));
+        donnees.add (new Client("COURS","Nathan"," rue de rose","diesen","France","3","57890",2));
 
         for (Client cl: donnees) {
             if (cl.getNom().equalsIgnoreCase(nom)){
