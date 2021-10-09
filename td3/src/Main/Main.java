@@ -1,13 +1,11 @@
 package Main;
-
-import ProcessAdresse.ProcessAdresse;
+import static Process.ProcessAdresse.*;
+import Metier.Adresse;
 
 public class Main {
 
     public static void main(String[] args) {
-        ProcessAdresse AD = new ProcessAdresse();
-
-        String ville = AD.normalizeVille(" st Moulin les metz");
-        System.out.println(ville);
+        Adresse pouet = new Adresse("abc","abc bd pl boul.","abc","abc","abc");
+        System.out.println(normalizeVoie(pouet));
     }
 }

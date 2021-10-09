@@ -1,4 +1,4 @@
-package Métier;
+package Metier;
 
 public class Adresse {
 
@@ -24,11 +24,11 @@ public class Adresse {
         this.voie = voie;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
@@ -48,11 +48,16 @@ public class Adresse {
         this.pays = pays;
     }
 
-    public Adresse(String numRue, String voie, int codePostal, String ville, String pays) {
+    public Adresse(String numRue, String voie, String codePostal, String ville, String pays) {
         this.numRue = numRue;
         this.voie = voie;
         this.codePostal = codePostal;
         this.ville = ville;
         this.pays = pays;
+    }
+
+    @Override
+    public String toString() {
+        return  numRue + voie + " "+codePostal +" "+ ville +" "+pays;
     }
 }
