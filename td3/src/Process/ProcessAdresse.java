@@ -41,8 +41,53 @@ public class ProcessAdresse {
     }
 
     public static String normalizeVille(Adresse adresse){
-        String str = adresse.getVille();
-        return null;
+        String[][] toChangeContent = {
+                {"st", "saint"},
+                {"ste", "saint"},
+        };
+
+        String[] preposition = {
+                "lès", "le", "sous", "sur", "à", "aux"
+        };
+
+        String[] str = adresse.getVille().toLowerCase().split(" ");
+
+        //Pour chaque mots de la ville vérifie si l'un des mots est a changer par son non abbréviation
+        for (int i = 0; i < str.length; i++) {
+            for (String[] a : toChangeContent) {
+                if (str[i].equals(a[0]) || (str[i].equals(a[0] + "."))) {
+                    str[i] = a[1] + "-";
+                    break;
+                }
+            }
+            //Pour chaques mot vérifie si l'un d'eux fait partie des propositions et ajoute des tirets autour si oui
+            for (int j = 0; j < preposition.length; j++) {
+                if (str[i].equals(preposition[j])) {
+                    str[i] = "-" + str[i] + "-";
+                }
+            }
+
+        }
+
+        for (int i = 0; i < str.length; i++) {
+            for (int j = 0; j < preposition.length; j++) {
+                if (!str[i].equals("-" + preposition[j] + "-")) {
+                    str[i] = str[i].substring(0, 1).toUpperCase() + str[i].substring(1);
+                }
+            }
+        }
+
+        StringBuilder villeAjuste = new StringBuilder();
+        for (int i = 0; i < str.length - 1; i++) {
+            if (str[i+1].startsWith("-") || str[i].endsWith("-")) {
+                villeAjuste.append(str[i]);
+            } else {
+                villeAjuste.append(str[i] + " ");
+            }
+        }
+        villeAjuste.append(str[str.length-1]);
+
+        return villeAjuste.toString();
     }
 
     public static String normalizeVoie(Adresse adresse) {

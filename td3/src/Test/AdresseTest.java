@@ -10,15 +10,16 @@ import Metier.Adresse;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class AdresseTest {
 
-    private  Adresse adresse1 = new Adresse("3","bd beauxmarchaix","L-57890","diesen","letzebuerg");
+    private Adresse adresse1;
 
-     @Before
+     @BeforeEach
      public void setUp(){
-         Adresse adresse1 = new Adresse("3","les bd beauxmarchaix","L-57890","diesen","letzebuerg");
+         adresse1 = new Adresse("3","bd beauxmarchaix","L-57890","diesen","letzebuerg");
      }
 
 
@@ -34,20 +35,20 @@ public class AdresseTest {
 
     @Test
     public void testNormalizeVilleLes(){
-         adresse1.setVille("montigny les metz");
-        assertEquals("Montigny-lès-metz", normalizeVille(adresse1));
+         adresse1.setVille("montigny lès metz");
+        assertEquals("Montigny-lès-Metz", normalizeVille(adresse1));
     }
 
     @Test
     public void testNormalizeVillesous(){
         adresse1.setVille("ham sous vasberg");
-        assertEquals("Ham-sous-vasberg", normalizeVille(adresse1));
+        assertEquals("Ham-sous-Vasberg", normalizeVille(adresse1));
     }
 
     @Test
     public void testNormalizeVilleA(){
-        adresse1.setVille("pont a mousson");
-        assertEquals("Pont-à-mousson", normalizeVille(adresse1));
+        adresse1.setVille("pont à mousson");
+        assertEquals("Pont-à-Mousson", normalizeVille(adresse1));
     }
 
     public void testNormalizeVilleAux(){
@@ -66,13 +67,7 @@ public class AdresseTest {
     }
 
     @Test
-    public void testNormalizeCodePostal(){
-        assertEquals("57890",normalizeCodePostal(adresse1));
-    }
-
-    @Test
     public void testNormalizeCodePostalAvecLettre(){
-        adresse1.setCodePostal("L-57890");
         assertEquals("57890",normalizeCodePostal(adresse1));
     }
 
@@ -103,7 +98,12 @@ public class AdresseTest {
     }
 
     @Test
-    public void testConstructAdresse(){
+    public void testToStringAdresse(){
          assertEquals("3,boulevard beauxmarchaix 57890 Diesen Luxembourg",normalizeAdresse(adresse1).toString());
+    }
+
+    @Test
+    public void testconstructAdresse(){
+        assertNotNull(normalizeAdresse(adresse1));
     }
 }
