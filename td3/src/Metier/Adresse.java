@@ -4,7 +4,7 @@ public class Adresse {
 
     private String numRue;
     private String voie;
-    private int codePostal;
+    private String codePostal;
     private String ville;
     private String pays;
 
