@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.controleur.ControleurPeriodicite">
+   <children>
+      <BorderPane layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="610.0">
+         <center>
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="122.0" prefWidth="600.0" BorderPane.alignment="TOP_CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.20001220703125" minWidth="10.0" prefWidth="207.2" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="568.0" minWidth="10.0" prefWidth="393.6000000000001" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints maxHeight="151.6" minHeight="10.0" prefHeight="34.20001373291015" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="122.0" prefWidth="180.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="45.0" text="Libellé :">
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="438.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="22.0" prefWidth="169.0">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" text="Ajouter" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <Label prefHeight="35.0" prefWidth="114.0" text="Périodicité" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <bottom>
+            <TableView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="204.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="131.99999237060547" text="Libelle" />
+              </columns>
+            </TableView>
+         </bottom>
+      </BorderPane>
+      <MenuBar fx:id="myMenuBar" prefHeight="27.0" prefWidth="610.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#switchToAppAccueil" text="Accueil" />
+                  <MenuItem mnemonicParsing="false" onAction="#boutonFermer" text="Quitter" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Tableau">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#switchToAppAbonnement" text="Abonnement" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToAppRevue" text="Revue" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToAppClient" text="Client" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Choix langage">
+            <items>
+                  <RadioMenuItem mnemonicParsing="false" text="SQL">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="language" />
+                     </toggleGroup></RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" text="ListeMémoire" toggleGroup="$language" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
