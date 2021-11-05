@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -27,8 +28,11 @@
                   <Button mnemonicParsing="false" onAction="#switchToAppClient" text="Client" />
                   <Button mnemonicParsing="false" onAction="#switchToAppAbonnement" text="Abonnement" />
                   <Label text="Veuillez choisir la base de données :" />
-                  <RadioButton mnemonicParsing="false" text="Mysql" />
-                  <RadioButton mnemonicParsing="false" text="ListeMémoire" />
+                  <RadioButton fx:id="radioMySql" mnemonicParsing="false" onAction="#getDaoMethode" text="Mysql">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="language" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioListeMemoire" mnemonicParsing="false" onAction="#getDaoMethode" text="ListeMémoire" toggleGroup="$language" />
                </children>
             </VBox>
          </children>

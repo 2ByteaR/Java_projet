@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="468.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.controleur.ControleurAbonnement">
@@ -56,35 +57,36 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <DatePicker GridPane.columnIndex="1" />
+                  <ChoiceBox fx:id="cbxRevueAbonnemement" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="cbxClientAbonnement" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="dateFinTextAbonnement" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="dateDebTextAbonnement" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </center>
          <right>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Rajouter" BorderPane.alignment="CENTER" />
+            <Button fx:id="btnAjouterAbonnement" mnemonicParsing="false" onAction="#methodeAjouter" prefHeight="26.0" prefWidth="66.0" text="Ajouter" BorderPane.alignment="CENTER" />
          </right>
          <bottom>
-            <HBox alignment="CENTER_LEFT" prefHeight="209.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="178.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView prefHeight="210.0" prefWidth="504.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="ID" />
-                      <TableColumn prefWidth="86.4000244140625" text="Abonnement" />
-                        <TableColumn prefWidth="75.0" text="Revue" />
-                        <TableColumn prefWidth="141.59996032714844" text="Date Début" />
-                        <TableColumn prefWidth="124.800048828125" text="Date Fin" />
-                    </columns>
+                  <TableView fx:id="tblAbonnement" prefHeight="152.0" prefWidth="600.0">
+                     <columns>
+                        <TableColumn fx:id="colAbonnementId" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="colAbonnementDebut" prefWidth="153.60003662109375" text="Date de début" />
+                        <TableColumn fx:id="colAbonnementFin" prefWidth="170.3999481201172" text="Date de Fin" />
+                        <TableColumn fx:id="colAbonnementRevue" minWidth="7.199951171875" prefWidth="92.79998779296875" text="Revue" />
+                        <TableColumn fx:id="colAbonnementClient" prefWidth="108.00006103515625" text="Client" />
+                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" text="Supprimer">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Button fx:id="btnModifierAbonnement" mnemonicParsing="false" onAction="#methodeModifier" text="Modifier" />
+                        <Button fx:id="btnSupprimerAbonnement" mnemonicParsing="false" onAction="#methodeSupprimer" text="Supprimer" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </bottom>
          <top>
             <Label prefHeight="30.0" prefWidth="120.0" text="Abonnement" BorderPane.alignment="CENTER">

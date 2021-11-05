@@ -10,6 +10,7 @@ public class Client {
     private String pays;
     private String voie;
     private String code_postal;
+    private String adresseComplete;
     private int id_client;
 
     public Client(String nom, String prenom, String noRue, String ville, String pays, String voie, String code_postal, int id_client) {
@@ -25,6 +26,11 @@ public class Client {
 
     public int getId_client() {
         return id_client;
+    }
+
+    @Override
+    public String toString() {
+        return prenom + " " + nom + " "+ id_client;
     }
 
     public void setId_client(int id_client) {
@@ -98,5 +104,9 @@ public class Client {
     @Override
     public int hashCode() {
         return Objects.hash(getId_client());
+    }
+
+    public String getCreationAdresse(){
+        return adresseComplete = noRue + ' ' + voie + ' '+ville+' '+code_postal +' '+pays;
     }
 }

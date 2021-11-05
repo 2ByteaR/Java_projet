@@ -64,16 +64,16 @@ public class ListeMemoireClientDAO implements ClientDAO<Client> {
 
     @Override
     public boolean delete(Client objet) {
-        Client supprime;
+        Client supprimer;
 
         int idx = this.donnees.indexOf(objet);
         if (idx == -1) {
             throw new IllegalArgumentException("Tentative de suppression d'un objet inexistant");
         } else {
-            supprime = this.donnees.remove(idx);
+            supprimer = this.donnees.remove(idx);
         }
 
-        return objet.equals(supprime);
+        return objet.equals(supprimer);
     }
 
 

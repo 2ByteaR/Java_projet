@@ -42,9 +42,6 @@ public class Periodicite {
 
     @Override
     public String toString() {
-        return "Periodicite{" +
-                "id=" + id +
-                ", libelle='" + libelle + '\'' +
-                '}';
+        return id +" " + libelle ;
     }
 }

@@ -2,12 +2,10 @@ package BDD.MySQLDAO;
 
 import BDD.Connexion.Connexion;
 import BDD.IDAO.RevueDAO;
+import BDD.Métier.Periodicite;
 import BDD.Métier.Revue;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,29 @@ public class MySQLRevueDAO implements RevueDAO<Revue> {
 
     @Override
     public List<Revue> findAll() {
-        return null;
+        List<Revue> re = new ArrayList<>();
+        try{
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
+
+            PreparedStatement req = laConnexion.prepareStatement("SELECT * FROM Revue");
+            ResultSet res = req.executeQuery();
+            while (res.next()){
+                int idRevue =res.getInt("id_revue");
+                String titre = res.getString("titre");
+                String description = res.getString("description");
+                Float tarifNumero = res.getFloat("tarif_numero");
+                String visuel = res.getString("visuel");
+                int idPeriodicite = res.getInt("id_periodicite");
+
+                re.add(new Revue(idRevue,idPeriodicite,description,tarifNumero,titre,visuel));
+            }
+            return re;
+
+        }catch (SQLException e){
+            System.out.println("Pb dans select " + e.getMessage());
+            return null ;
+        }
     }
 
     @Override
@@ -61,8 +81,25 @@ public class MySQLRevueDAO implements RevueDAO<Revue> {
 
     @Override
     public boolean create(Revue objet) {
+        try{
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
 
-        return false;
+            PreparedStatement requete = laConnexion.prepareStatement("insert into Revue (id_revue,titre, description,tarif_numero,visuel,id_periodicite) values (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            requete.setInt(1,objet.getId_revue());
+            requete.setString(2,objet.getTitre());
+            requete.setString(3,objet.getDescription());
+            requete.setFloat(4,objet.getTarif_numeros());
+            requete.setString(5,objet.getVisuel());
+            requete.setInt(6,objet.getId_periodicite());
+
+            requete.executeUpdate();
+            return true;
+
+        }catch (SQLException sqle){
+            System.out.println("Pb dans select " + sqle.getMessage());
+            return false;
+        }
     }
 
     @Override

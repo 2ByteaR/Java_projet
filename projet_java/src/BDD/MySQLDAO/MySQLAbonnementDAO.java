@@ -3,6 +3,7 @@ package BDD.MySQLDAO;
 import BDD.Connexion.Connexion;
 import BDD.IDAO.AbonnementDAO;
 import BDD.Métier.Abonnement;
+import BDD.Métier.Revue;
 
 import java.sql.*;
 import java.util.*;
@@ -23,6 +24,31 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
 
     @Override
     public List<Abonnement> findAll() {
+        List<Abonnement> result = new ArrayList<>();
+        try {
+            Connexion connexion = new Connexion();
+            Connection laConnexion = connexion.creeConnexion();
+
+            PreparedStatement requete = laConnexion.prepareStatement("SELECT * FROM Abonnement");
+            ResultSet res = requete.executeQuery();
+
+            while (res.next()) {
+                int id = res.getInt("id_abonnement");
+                int id_revue = res.getInt("id_revue");
+                int id_client = res.getInt("id_client");
+                Date date_deb = res.getDate("date_debut");
+                Date date_fin = res.getDate("date_fin");
+
+                Abonnement ab = new Abonnement(id, date_deb, date_fin, id_client, id_revue);
+
+                result.add(ab);
+
+            }
+            return result;
+        }
+        catch (SQLException sql){
+            System.out.println("pb dans le select " + sql.getMessage());
+        }
         return null;
     }
 
@@ -64,7 +90,7 @@ public class MySQLAbonnementDAO implements AbonnementDAO<Abonnement> {
             Connection laConnexion = connexion.creeConnexion();
 
             PreparedStatement requete = laConnexion.prepareStatement("insert into Abonnement (date_debut,date_fin,id_revue,id_client) values (?,?,?,?)");
-            requete.setInt(4, objet.getId_abonnement());
+            requete.setInt(4, objet.getId_client());
             requete.setInt(3,objet.getId_revue());
 
             long timeInMilliSeconds = objet.getDate_deb().getTime();

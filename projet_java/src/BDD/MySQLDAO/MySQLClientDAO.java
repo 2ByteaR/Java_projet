@@ -3,6 +3,7 @@ package BDD.MySQLDAO;
 import BDD.Connexion.Connexion;
 import BDD.IDAO.ClientDAO;
 import BDD.Métier.Client;
+import BDD.Métier.Revue;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,8 +24,35 @@ public class MySQLClientDAO implements ClientDAO<Client> {
 
     @Override
     public List<Client> findAll() {
-        return null;
+            ArrayList<Client> result = new ArrayList<>();
+            try{
+                Connexion connexion = new Connexion();
+                Connection laConnexion = connexion.creeConnexion();
+
+                PreparedStatement req = laConnexion.prepareStatement("SELECT * FROM Client");
+                ResultSet res = req.executeQuery();
+                while (res.next()){
+                    int id_client = res.getInt("id_client");
+                    String nom = res.getString("nom");
+                    String prenom = res.getString("prenom");
+                    String no_rue = res.getString("no_rue");
+                    String ville = res.getString("ville");
+                    String pays = res.getString("pays");
+                    String codePostal =res.getString("code_postal");
+                    String voie =res.getString("voie");
+
+                    Client cl = new Client(nom,prenom,no_rue,ville,pays,voie,codePostal,id_client);
+                    result.add(cl);
+                }
+                return result;
+
+            }catch (SQLException e){
+                System.out.println("Pb dans select " + e.getMessage());
+                return null ;
+            }
+
     }
+
 
     @Override
     public Client getById(int id) {

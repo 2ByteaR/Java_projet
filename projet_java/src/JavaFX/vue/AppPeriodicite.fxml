@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.controleur.ControleurPeriodicite">
@@ -35,7 +36,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="122.0" prefWidth="180.0" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="45.0" text="Libellé :">
+                        <Label fx:id="labelLib" prefHeight="18.0" prefWidth="45.0" text="Libellé :">
                            <HBox.margin>
                               <Insets right="3.0" />
                            </HBox.margin>
@@ -44,12 +45,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="438.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="22.0" prefWidth="169.0">
+                        <TextField fx:id="textFieldLibelle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="22.0" prefWidth="169.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" text="Ajouter" />
+                        <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
                      </children>
                   </HBox>
                </children>
@@ -66,12 +67,23 @@
             </Label>
          </top>
          <bottom>
-            <TableView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="204.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="131.99999237060547" text="Libelle" />
-              </columns>
-            </TableView>
+            <VBox alignment="CENTER" prefHeight="231.0" prefWidth="610.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="labelErreur" textFill="#f70505" />
+                  <TableView fx:id="tblPeriodicite" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#tableauSelectionner" onMouseExited="#tableauDeselectionner" prefHeight="206.0" prefWidth="202.0">
+                     <columns>
+                        <TableColumn fx:id="colPerioId" prefWidth="93.59997862577438" text="ID" />
+                        <TableColumn fx:id="colPerioLibelle" prefWidth="109.59999084472656" text="Libelle" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="CENTER" prefHeight="36.0" prefWidth="610.0">
+                     <children>
+                        <Button fx:id="btnSupprimer" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                        <Button mnemonicParsing="false" onAction="#methodeModifier" text="Modifier" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </bottom>
       </BorderPane>
       <MenuBar fx:id="myMenuBar" prefHeight="27.0" prefWidth="610.0">

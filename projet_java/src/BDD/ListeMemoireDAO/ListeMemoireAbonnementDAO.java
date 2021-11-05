@@ -32,7 +32,7 @@ public class ListeMemoireAbonnementDAO implements AbonnementDAO<Abonnement> {
 
     @Override
     public List<Abonnement> findAll() {
-        return null;
+        return this.donnees;
     }
 
     @Override
