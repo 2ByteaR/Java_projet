@@ -13,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../JavaFX/vue/AppAccueil.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../Javafx/vue/AppAccueil.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Hello!");
         stage.setScene(scene);

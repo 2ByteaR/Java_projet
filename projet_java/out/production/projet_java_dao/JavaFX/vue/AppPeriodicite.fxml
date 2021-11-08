@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.controleur.ControleurPeriodicite">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Javafx.controleur.ControleurPeriodicite">
    <children>
       <BorderPane layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="610.0">
          <center>
@@ -50,7 +51,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnAjouter" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+                        <Button fx:id="btnAjouterPeriodicite" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
                      </children>
                   </HBox>
                </children>
@@ -70,7 +71,7 @@
             <VBox alignment="CENTER" prefHeight="231.0" prefWidth="610.0" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="labelErreur" textFill="#f70505" />
-                  <TableView fx:id="tblPeriodicite" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#tableauSelectionner" onMouseExited="#tableauDeselectionner" prefHeight="206.0" prefWidth="202.0">
+                  <TableView fx:id="tblPeriodicite" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="206.0" prefWidth="202.0">
                      <columns>
                         <TableColumn fx:id="colPerioId" prefWidth="93.59997862577438" text="ID" />
                         <TableColumn fx:id="colPerioLibelle" prefWidth="109.59999084472656" text="Libelle" />
@@ -78,8 +79,8 @@
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="36.0" prefWidth="610.0">
                      <children>
-                        <Button fx:id="btnSupprimer" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-                        <Button mnemonicParsing="false" onAction="#methodeModifier" text="Modifier" />
+                        <Button fx:id="btnSupprimerPeriodicite" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                        <Button fx:id="btnModifierPeriodicite" mnemonicParsing="false" onAction="#methodeModifier" text="Modifier" />
                      </children>
                   </HBox>
                </children>
@@ -91,6 +92,8 @@
           <Menu mnemonicParsing="false" text="Menu">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#switchToAppAccueil" text="Accueil" />
+                  <MenuItem mnemonicParsing="false" onAction="#methodeReset" text="Reset" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#boutonFermer" text="Quitter" />
                </items></Menu>
           <Menu mnemonicParsing="false" text="Tableau">

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="488.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.controleur.ControleurClient">
+<AnchorPane prefHeight="488.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Javafx.controleur.ControleurClient">
    <children>
       <BorderPane layoutY="26.0" prefHeight="461.0" prefWidth="600.0">
          <top>
@@ -65,21 +66,21 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="99.0" GridPane.columnIndex="1" />
-                  <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="41.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="318.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldNomClient" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="99.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="textFieldPrenomClient" maxWidth="-Infinity" prefHeight="26.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textFieldVoieClient" maxWidth="-Infinity" prefHeight="26.0" prefWidth="136.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldNoRueClient" maxWidth="-Infinity" prefHeight="26.0" prefWidth="31.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Ville :" GridPane.columnIndex="2" />
                   <Label text="Code Postal :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Label text="Pays :" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="104.0" GridPane.columnIndex="3" />
-                  <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="130.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="160.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="textFieldVilleClient" maxWidth="-Infinity" prefHeight="26.0" prefWidth="104.0" GridPane.columnIndex="3" />
+                  <TextField fx:id="textFieldCpClient" maxWidth="-Infinity" prefHeight="26.0" prefWidth="130.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="textFieldPaysClient" maxWidth="-Infinity" prefHeight="26.0" prefWidth="160.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </center>
          <right>
-            <Button mnemonicParsing="false" text="Rajouter" BorderPane.alignment="CENTER" />
+            <Button fx:id="btnAjouterClient" mnemonicParsing="false" onAction="#methodeAjouter" text="Ajouter" BorderPane.alignment="CENTER" />
          </right>
          <bottom>
             <VBox prefHeight="198.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -89,17 +90,17 @@
                       <TableColumn fx:id="colClientId" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="colClientNom" prefWidth="75.0" text="Nom" />
                         <TableColumn fx:id="colClientPrenom" prefWidth="75.0" text="Prénom" />
-                        <TableColumn fx:id="colClientAdresse" prefWidth="278.4000244140625" text="Adresse" />
+                        <TableColumn fx:id="colClientAdresse" prefWidth="371.99993896484375" text="Adresse" />
                     </columns>
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="31.0" prefWidth="600.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Supprimer">
+                        <Button fx:id="btnSupprimerClient" mnemonicParsing="false" onAction="#methodeSupprimer" prefHeight="26.0" prefWidth="90.0" text="Supprimer">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Modifier" />
+                        <Button fx:id="btnModifierClient" mnemonicParsing="false" onAction="#methodeModifier" text="Modifier" />
                      </children>
                   </HBox>
                </children>
@@ -110,7 +111,10 @@
         <menus>
           <Menu mnemonicParsing="false" text="Menu">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#methodeImporterClient" text="Importer des Clients" />
               <MenuItem mnemonicParsing="false" onAction="#switchToAppAccueil" text="Accueil" />
+                  <MenuItem mnemonicParsing="false" onAction="#methodeReset" text="Reset" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#boutonFermer" text="Quitter" />
             </items>
           </Menu>
