@@ -8,10 +8,9 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -21,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="468.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Javafx.controleur.ControleurAbonnement">
+<AnchorPane prefHeight="468.0" prefWidth="600.0" stylesheets="@../../ressource/appCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.controleur.ControleurAbonnement">
    <children>
       <BorderPane layoutX="-1.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="469.0" prefWidth="600.0">
          <center>
@@ -81,26 +80,34 @@
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="26.0" prefWidth="600.0">
                      <children>
-                        <Button fx:id="btnModifierAbonnement" mnemonicParsing="false" onAction="#methodeModifier" text="Modifier" />
-                        <Button fx:id="btnSupprimerAbonnement" mnemonicParsing="false" onAction="#methodeSupprimer" text="Supprimer" />
+                        <Button fx:id="btnSupprimerAbonnement" mnemonicParsing="false" onAction="#methodeSupprimer" text="Supprimer">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="btnModifierAbonnement" mnemonicParsing="false" onAction="#methodeModifier" text="Modifier">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
          </bottom>
          <top>
-            <Label prefHeight="30.0" prefWidth="120.0" text="Abonnement" BorderPane.alignment="CENTER">
+            <Label id="Titre" prefHeight="46.0" prefWidth="143.0" text="Abonnement" BorderPane.alignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </top>
       </BorderPane>
-      <MenuBar fx:id="myMenuBar" layoutY="1.0" prefHeight="26.0" prefWidth="600.0">
+      <MenuBar fx:id="myMenuBar" layoutY="-2.0" prefHeight="33.0" prefWidth="600.0">
         <menus>
           <Menu mnemonicParsing="false" text="Menu">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#switchToAppAccueil" text="Accueil" />
+                  <MenuItem mnemonicParsing="false" onAction="#methodeReset" text="Reset" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#boutonFermer" text="Quitter" />
             </items>
           </Menu>
@@ -110,16 +117,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#switchToAppRevue" text="Revue" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToAppClient" text="Client" />
             </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Language">
-               <items>
-                  <RadioMenuItem mnemonicParsing="false" text="MySQL">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="language" />
-                     </toggleGroup>
-                  </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" text="ListeMémoire" toggleGroup="$language" />
-               </items>
           </Menu>
         </menus>
       </MenuBar>

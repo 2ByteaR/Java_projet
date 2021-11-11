@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -21,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="595.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Javafx.controleur.ControleurRevue">
+<AnchorPane prefHeight="595.0" prefWidth="619.0" stylesheets="@../../ressource/appCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.controleur.ControleurRevue">
    <children>
       <BorderPane layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="619.0">
          <center>
@@ -40,7 +39,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="115.0" GridPane.rowIndex="1">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="33.0" text="Titre :">
+                        <Label prefHeight="20.0" prefWidth="42.0" text="Titre :">
                            <HBox.margin>
                               <Insets right="3.0" />
                            </HBox.margin>
@@ -49,7 +48,7 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="67.0" text="Description :">
+                        <Label prefHeight="20.0" prefWidth="78.0" text="Description :">
                            <HBox.margin>
                               <Insets right="3.0" />
                            </HBox.margin>
@@ -83,7 +82,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <TextField fx:id="textTarifRevue" prefHeight="26.0" prefWidth="127.0" />
-                        <Label prefHeight="18.0" prefWidth="102.0" text="Euros en numéros">
+                        <Label prefHeight="20.0" prefWidth="120.0" text="Euros en numéros">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -95,7 +94,7 @@
             </GridPane>
          </center>
          <top>
-            <Label prefHeight="35.0" prefWidth="71.0" text="Revue" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Label id="Titre" prefHeight="35.0" prefWidth="71.0" text="Revue" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
@@ -107,7 +106,7 @@
          <right>
             <VBox alignment="CENTER" prefHeight="293.0" prefWidth="58.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnAjouterRevue" mnemonicParsing="false" onAction="#ajouterRevue" prefHeight="26.0" prefWidth="56.0" text="Ajouter" />
+                  <Button fx:id="btnAjouterRevue" mnemonicParsing="false" onAction="#ajouterRevue" prefHeight="30.0" prefWidth="78.0" text="Ajouter" />
                </children>
             </VBox>
          </right>
@@ -119,22 +118,28 @@
                         <TableColumn fx:id="colRevueId" prefWidth="75.0" text="ID" />
                         <TableColumn fx:id="colRevueTitre" prefWidth="81.59992218017578" text="Titre" />
                         <TableColumn fx:id="colRevueTarif" prefWidth="52.0" text="Tarif " />
-                        <TableColumn fx:id="colRevueDescription" prefWidth="251.20001220703125" text="Description" />
-                        <TableColumn fx:id="colRevueVisuel" prefWidth="68.79995727539062" text="Visuel" />
-                        <TableColumn fx:id="colRevuePeriodicite" prefWidth="89.60002441406255" text="Périodicité" />
+                        <TableColumn fx:id="colRevueDescription" prefWidth="190.39996337890625" text="Description" />
+                        <TableColumn fx:id="colRevueVisuel" prefWidth="101.5999755859375" text="Visuel" />
+                        <TableColumn fx:id="colRevuePeriodicite" prefWidth="119.19992065429688" text="Périodicité" />
                      </columns>
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="btnSupprimerRevue" mnemonicParsing="false" onAction="#supprimerRevue" text="Supprimez" />
-                        <Button fx:id="btnModifierRevue" mnemonicParsing="false" onAction="#modifierRevue" text="Modifier" />
+                        <Button fx:id="btnModifierRevue" mnemonicParsing="false" onAction="#modifierRevue" prefHeight="30.0" prefWidth="70.0" text="Modifier">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
          </bottom>
       </BorderPane>
-      <MenuBar fx:id="myMenuBar" prefHeight="26.0" prefWidth="610.0">
+      <MenuBar fx:id="myMenuBar" prefHeight="30.0" prefWidth="619.0">
         <menus>
             <Menu mnemonicParsing="false" text="Menu">
               <items>
@@ -148,12 +153,6 @@
               <MenuItem mnemonicParsing="false" onAction="#switchToAppAbonnement" text="Abonnement" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToAppPeriodicite" text="Périodicité" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToAppClient" text="Client" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Choix language">
-            <items>
-                  <RadioMenuItem mnemonicParsing="false" text="SQL" />
-                  <RadioMenuItem mnemonicParsing="false" text="ListeMémoire" />
             </items>
           </Menu>
         </menus>
