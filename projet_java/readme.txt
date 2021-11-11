@@ -24,6 +24,6 @@ Répartition des tâches:
     Les 2 :
         -DAO Factory fait en td
 
-Implication dans le travaille :
-    CARL Noé : 49 %
-    COURS Nathan : 51%
+Implication dans le travail :
+    CARL Noé : 40 %
+    COURS Nathan : 60%
